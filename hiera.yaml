@@ -1,0 +1,21 @@
+---
+### Used for testing with Vagrant ONLY
+:backends:
+  - yaml
+  #- eyaml
+
+:yaml:
+  :datadir: /var/lib/hiera
+
+#:eyaml:
+#  :datadir: /var/lib/hiera
+#  :pkcs7_private_key: /etc/puppet/secure/keys/private_key.pkcs7.pem
+#  :pkcs7_public_key: /etc/puppet/secure/keys/public_key.pkcs7.pem
+
+# operatingsystem and dev-mgmt is only used in local (vagrant) testing - not in real hiera.yaml
+:hierarchy:
+  - "%{::operatingsystem}"
+  - "nodes/%{::fqdn}"
+  - environments/mysqldb
+
+:logger: console

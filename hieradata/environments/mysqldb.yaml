@@ -1,0 +1,36 @@
+---
+## Top-scope ############################################################################
+http_proxy: 'http://10.10.110.110:8080'
+
+## MySQL ################################################################################
+# TODO
+
+fabric_data::users:
+   'fabric@%' :
+      ensure                         : present
+      max_connections_per_hour       : 0
+      max_queries_per_hour           : 0
+      max_updates_per_hour           : 0
+      max_user_connections           : 0
+      password_hash                  : '*CB4AFD4AA6D15B1B4B2F249F7386275638D906B8'
+
+fabric_data::grants:
+   'fabric@%' :
+      ensure                         : present
+      options                        : GRANT
+      privileges                     : ALL
+      table                          : '*.*'
+      user                           : 'fabric@%'
+
+#mysql_fabric::databases:
+
+fabric_data::override_options:
+   'mysqld' :
+      gtid_mode                      : 'ON'
+      bind_address                   : 0.0.0.0
+      innodb_buffer_pool_size        : 64MB
+      enforce-gtid-consistency       : true
+      performance-schema-instrument  : "'%=ON'"
+      innodb-flush-log-at-trx-commit : 2
+      log-bin                        : true
+      log-slave-updates              : true

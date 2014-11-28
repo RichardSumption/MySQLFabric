@@ -1,0 +1,59 @@
+[DEFAULT]
+prefix =
+sysconfdir = /etc
+logdir = /var/log
+
+[statistics]
+prune_time = 3600
+
+[logging]
+url = file:///var/log/fabric.log
+level = INFO
+
+[storage]
+auth_plugin = mysql_native_password
+database = fabric
+user = fabric
+address = fabric01:3306
+connection_delay = 1
+connection_timeout = 6
+password = 
+connection_attempts = 6
+
+[failure_tracking]
+notification_interval = 60
+notification_clients = 50
+detection_timeout = 1
+detection_interval = 6
+notifications = 300
+detections = 3
+failover_interval = 0
+prune_time = 3600
+
+[servers]
+password = 
+user = 
+
+[connector]
+ttl = 1
+
+[client]
+password =
+
+[protocol.xmlrpc]
+disable_authentication = no
+ssl_cert =
+realm = MySQL Fabric
+ssl_key =
+ssl_ca =
+threads = 5
+user = admin
+address = fabric01:32274
+password = 
+
+[executor]
+executors = 5
+
+[sharding]
+mysqldump_program = /usr/bin/mysqldump
+mysqlclient_program = /usr/bin/mysql
