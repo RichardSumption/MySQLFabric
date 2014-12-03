@@ -20,7 +20,15 @@ class fabric_data (
       remove_default_accounts => false,
    } ~>
 
-   exec { 'stoplogbin' :
+   exec { 'removeUsers' :
+      command => "mysql -uroot -proot123 < /vagrant/mysql_users.sql",
+      path    => "/usr/bin",
+      require => Service["mysqld"],
+   }
+
+# Original code that used sql_log_bin to stop logging while removing unwanted users.
+# As of 5.6.22 the GLOBAL use of sql_log_bin is depricated and the above script (SESSION use) is used in it's place.
+/*   exec { 'stoplogbin' :
       command => "mysql -uroot -proot123 -e \"set global sql_log_bin=0\"",
       path    => "/usr/bin",
       require => Service["mysqld"],
@@ -41,5 +49,5 @@ class fabric_data (
       path    => "/usr/bin",
       require => Service["mysqld"],
    }
-
+*/
 }
