@@ -15,4 +15,4 @@ Base box is a minimal Centos 6.5 OS with puppet pre-installed and the Mysql 5.6 
 
 With that installed, just run 'vagrant up' in the git-bash window.
 
-Uses the puppetlabes mysql engine and stdlibs.
+Uses the puppetlabes mysql engine and stdlibs (included in the modules sub-directory).
